@@ -40,7 +40,8 @@ export default {
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   setupFilesAfterEnv: [
-    "./tests/jest.setup.ts"
+    "./tests/jest.setup.ts",
+    "<rootDir>/prisma/singleton.ts"
   ],
 
   // The glob patterns Jest uses to detect test files
