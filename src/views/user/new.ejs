@@ -1,0 +1,15 @@
+<% if (errors) { %>
+  <% errors.forEach(error => { %>
+    <span style="color: red;">
+      <strong><%= error["path"] %></strong><%= error["msg"] %>
+    </span>
+    <br>
+  <% }) %>
+<% } %>
+<%- include('../layouts/header'); -%>
+<form action="/usuario" method="post">
+  <%- include('../partials/user-form'); -%>
+  <button type="submit">Cadastrar</button>
+</form>
+
+<%- include('../layouts/footer'); -%>

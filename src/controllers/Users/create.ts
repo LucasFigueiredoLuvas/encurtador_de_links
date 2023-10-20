@@ -1,27 +1,26 @@
 import { Request, Response } from "express";
-// import { prisma } from "../../database/prisma";
-
-type User = {
-  name: string,
-  email: string,
-  password: string,
-  admin: boolean
-}
+import { validationResult } from "express-validator";
+import { createUser } from "../../models/User";
 
 export async function create (req: Request, res: Response) {
-  const a = req.query;
-  console.log(a);
-  res.status(200).render("./user/signUp");
+  const valid = validationResult(req);
+  const { name, email, password } = req.body;
+  
+  if (!valid.isEmpty()) {
+    return res.status(400).render("./user/new", { errors: valid.array() });//" //
+  }
+
+  try {
+    const user = await createUser({ name, email, password });
+    res.status(200).render("./user/show", { user, errors: null });
+  } 
+  catch (error) {
+    console.error(error);    
+    return res.status(500).render("./user/new", { errors: [{ path: "Erro", msg: "Ocorreu um erro" }] });
+  }
 }
 
-export async function signUp (req: Request, res: Response) {
-  res.status(200).render("./user/create");
-  
-  // if (user.name.length < 1) {
-  //   return await prisma.user.create({
-  //     data: user,
-  //   });
-  // } else {
-  //   return new Error("invalid name!");
-  // }
+export async function newAccount (req: Request, res: Response) {
+  res.status(200).render("./user/new", { errors: null });
 }
+// 7d7JxvZAL@ZpRq6

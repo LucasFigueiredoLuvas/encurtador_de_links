@@ -1,0 +1,15 @@
+<h1>Perfil</h1>
+<% if (!errors) { %>
+
+  <p><%= user.name %></p>
+  <p><%= user.email %></p>
+
+<% } else { %>
+
+  <% errors.forEach(err => { %>
+
+    <p><%= err %></p>
+
+  <% }) %>
+
+<% } %>

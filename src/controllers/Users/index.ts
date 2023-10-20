@@ -1,6 +1,6 @@
-import { create, signUp } from "./create";
+import { create, newAccount } from "./create";
 
 export const UsersController = {
   create,
-  signUp
+  newAccount
 };
